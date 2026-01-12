@@ -122,16 +122,18 @@ export default async function SchoolProfilePage({
               <div className="bg-white rounded-lg shadow p-6">
                 <h2 className="text-xl font-semibold mb-4">Gallery</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {galleryImages.map((image) => (
-                    <div key={image.id} className="relative h-48">
-                      <Image
-                        src={image.image_url}
-                        alt={image.caption || 'School image'}
-                        fill
-                        className="object-cover rounded-lg"
-                      />
-                    </div>
-                  ))}
+                  {galleryImages
+                    .filter((image) => image.image_url)
+                    .map((image) => (
+                      <div key={image.id} className="relative h-48">
+                        <Image
+                          src={image.image_url}
+                          alt={image.caption || 'School image'}
+                          fill
+                          className="object-cover rounded-lg"
+                        />
+                      </div>
+                    ))}
                 </div>
               </div>
             )}
