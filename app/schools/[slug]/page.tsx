@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { formatCurrency } from '@/lib/utils'
+import Image from 'next/image'
 
 export default async function SchoolProfilePage({
   params,
@@ -64,10 +65,11 @@ export default async function SchoolProfilePage({
       {/* Cover Image */}
       {coverImage && (
         <div className="h-64 md:h-96 bg-gray-200 relative">
-          <img
+          <Image
             src={coverImage}
             alt={school.school_name}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
         </div>
       )}
@@ -121,12 +123,14 @@ export default async function SchoolProfilePage({
                 <h2 className="text-xl font-semibold mb-4">Gallery</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {galleryImages.map((image) => (
-                    <img
-                      key={image.id}
-                      src={image.image_url}
-                      alt={image.caption || 'School image'}
-                      className="w-full h-48 object-cover rounded-lg"
-                    />
+                    <div key={image.id} className="relative h-48">
+                      <Image
+                        src={image.image_url}
+                        alt={image.caption || 'School image'}
+                        fill
+                        className="object-cover rounded-lg"
+                      />
+                    </div>
                   ))}
                 </div>
               </div>

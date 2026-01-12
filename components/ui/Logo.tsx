@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import Image from 'next/image'
 
 interface LogoProps {
   variant?: 'full' | 'wordmark' | 'icon'
@@ -64,6 +65,7 @@ export function Logo({
 
   return (
     <div className={cn('flex items-center', className)}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={getLogoPath()}
         alt="EduSeek"

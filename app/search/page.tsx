@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { SchoolProfile, SearchFilters, Promotion } from '@/lib/types'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+import Image from 'next/image'
 
 interface SchoolWithDetails extends SchoolProfile {
   promotion?: Promotion | null
@@ -22,11 +23,7 @@ export default function SearchPage() {
   })
   const supabase = createClient()
 
-  useEffect(() => {
-    loadSchools()
-  }, [filters])
-
-  async function loadSchools() {
+  const loadSchools = useCallback(async () => {
     setIsLoading(true)
     try {
       let query = supabase
@@ -126,7 +123,11 @@ export default function SearchPage() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [filters, supabase])
+
+  useEffect(() => {
+    loadSchools()
+  }, [loadSchools])
 
   function getPromotionTag(promotion?: Promotion | null) {
     if (!promotion) return null
@@ -401,10 +402,11 @@ export default function SearchPage() {
                       {/* Image with Promotion Tag */}
                       <div className="relative h-48 bg-gray-200">
                         {school.cover_image_url ? (
-                          <img
+                          <Image
                             src={school.cover_image_url}
                             alt={school.school_name}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-blue-100 to-green-100 flex items-center justify-center">

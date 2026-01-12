@@ -24,7 +24,7 @@ export default function Home() {
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl mb-10 text-white/95 max-w-3xl mx-auto">
               Discover, compare, and connect with the best schools across South Africa. 
-              Your child's educational journey starts here.
+              Your child&apos;s educational journey starts here.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/search">
